@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+
+<div class="example-wrapper">
+    <header>
+    
+    <img class="LogoSym" src="images/SfBig.png" alt="Logo de symfony" width="80%" >
+    <h1>Blog de noticias </h1>
+</header>
+<div class="contenedor">
+   <div class="feedback">
+    <ul>
+        <li>REGISTRO <code><a href="{{ path('app_register') }}"> registro</a></code></li>
+        <li>LOGIN <code><a href="{{ path('app_login') }}"> login</a></code></li>
+    {% if  is_granted("ROLE_ADMIN")  %}
+        
+        <li>CREAR NOTICIA NUEVA<code><a href="{{ path('app_noticia_index') }}"> CREATE NEW NEW</a></code></li>
+     {% endif %}
+
+     {% if app.user %}
+   {# <li>Hola {{ app.user }}"></li>  #}
+    <li>User registerered :{{ app.user.name }} </li>  
+     <a href="{{ path('app_logout') }}">Logout</a>
+
+
+     {% else %}
+      <li><b>User unregisterered </b></li>  
+       {% endif %}
+    
+     </ul>
+</div>
+        <h2><b>Noticias</b></h2>
+<br>
+    <table class="table">
+        <thead>
+         {# 
+            <tr>
+                <th>Id</th>
+                <th>Title</th>         
+                <th>Desc</th>
+                <th>Autor </th>
+               
+            </tr>
+            #}
+       
+        {% for noticia in noticias %}       
+           
+              {#  <td><b>{{ noticia.id }}<b></td> #}
+                <h3><b>{{ noticia.titulo}}</b></h3>
+                <p>Mail del autor: {{ noticia.autor.email}}</p>
+                <p class="fechaNoti">Fecha de la noticia : {{ noticia.date | date ('d/m/y')}}</p> 
+                <p>{{ noticia.descripcion}}</p>
+                <img class="fotoNoticia" width="300px" src="/images/{{noticia.noticiafoto}}"> </p>
+              {% for comentario in noticia.comentarios %}
+            
+                <div class="comentarioCaja">
+                <p class="blueTitle"> Título comentado: {{ comentario.noticia.titulo}}</p>        
+              {# <p class="blueUser">Email del usuario del comentario: {{ comentario.autor.email}}</p> #}
+                <p class="blueUser"> Usuario del comentario: {{ comentario.autor.name}}</p>
+                <p class="blueComent fechaComent">Fecha del comentario: {{ comentario.date | date ('d/m/y') }}</p> 
+                <p class="blueComent">{{ comentario.texto}}</p> 
+              {#  estructura de flujo de regulación de comentarios#}
+              
+
+         {% if  app.user!=null %}
+              {% if  app.user.userIdentifier== comentario.autor.email %}
+                <p> <form method="POST" action="{{path('app_comentario_edit',{'id':comentario.id })}}">
+                        <input role="button" class="BotonMargenIz btn btn-success btn-sm" onclick="return confirm('¿Vas de modificar un comentario?')" class="BotonMargenIz" type="submit" value="Editar comentario"> </p>
+                    </form>
+
+            {#  Formulario de editar borrar #}
+                <p> <form method="POST" action="{{path('app_comentario_delete',{'id':comentario.id })}}">
+                        <input role="button" class="BotonMargenIz btn btn-warning btn-sm" onclick="return confirm('¿Vas de borrar para siempre un comentario?')" class="BotonMargenIz" type="submit" value="Borrar comentario"> </p>
+                    </form>
+
+                    {% endif %}
+  {% endif %}
+
+
+        </div>
+         <hr size="5px" width="50%" align="center"/>
+        {% else %}
+           
+                <p class="blue" colspan="4">no records found</p>
+       
+        {% endfor %}
+      
+                <p><form method="POST" action="{{path('app_create',{'id':noticia.id })}}">
+                <label for="myInput"> Añadir comentario</label>
+                <input name="texto" type="text" id="myInput">
+                <input role="button"  class="BotonMargenIz btn btn-primary  btn-sm" type="submit"> </p>
+                </form>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        <br>
+    
+{# #}
+   
+   
+</div>
+</div>
+{% endblock %}
+   

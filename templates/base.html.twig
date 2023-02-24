@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+     <!-- <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"> -->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+        *{
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.5em; 
+            background:white;
+        }
+        .example-wrapper{
+          margin-left:30px;
+          margin-right:30px;
+        }
+
+        .contenedor{
+            margin-left:50px;
+        }
+        .LogoSym{
+            margin-left:-5%;            
+        }
+        .loginDiv{
+            width:50%;
+            margin-left:50px;
+        }
+
+      .form-control{
+        margin:10px;
+        padding: 5px;
+
+      }
+      .mybtn{
+        margin:5px;
+        padding:10px;
+        width: 80px;
+      }
+      .tituloComent{
+        background:black;
+      }
+
+        header>h1{
+            margin-left: 50px;
+            margin-bottom: 30px;
+            font-size: 3em;
+        }
+        .blueTitle{
+            color:#A86354 ;
+              float:left;
+            margin-left: 10px;
+            padding-left:40px;
+            
+    }
+    .blueUser{
+        
+            float:right;
+            margin-right:40px;
+
+        
+    }
+    .blueComent{
+        
+           clear:both;
+           margin-left:50px;
+    }
+    .BotonMargenIz{
+
+      margin-top:10px;
+      margin-left:5%;
+    }
+ .cuerpoUniversal{
+
+    -webkit-box-shadow: 10px 10px 5px -4px rgba(204,204,204,1);
+    -moz-box-shadow: 10px 10px 5px -4px rgba(204,204,204,1);
+    box-shadow: 10px 10px 5px -4px rgba(204,204,204,1);
+    width:95%;
+    margin-left:20px;
+ }
+
+ .feedback{
+    width:100%;
+    list-style-type:none;
+ 
+    padding:0;
+
+ }
+ ul{
+    list-style-type: none;
+ }
+
+ .fechaNoti{
+    background:lightgrey;
+    width:30%;
+    margin-left:5px;
+ }
+ .fechaComent{
+    background:#e6e6e6;
+   width:28%;
+   
+
+ }
+
+ .comentarioCaja{
+
+    background:whitesmoke;
+    width:100%;
+    margin-top:10px;
+    padding-top:20px;
+    padding-bottom:20px;
+    font-size:0.8em;
+    color:#999999;
+
+ }
+hr{
+ 
+ margin-left:25%;
+ border:2px solid #e6e6e6;
+  
+}
+.fotoNoticia{
+
+  margin-left: 25%;
+
+
+}
+
+        </style>
+
+     
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+      <div class="cuerpoUniversal">
+        {% block body %}{% endblock %}
+      
+
+         <p>✅Volver al portal princial <code><a href="{{ path('app_home') }}"> HOME</a></code></p>
+      <div>
+
+      <footer>
+{# 
+   <a href="{{ path('app_main') }}">  Volver al main</a>
+      </footer>  #}
+
+    </body>
+</html>
